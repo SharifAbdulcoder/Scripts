@@ -1,4 +1,10 @@
 #!/bin/bash
+for i in servers.txt
+do
+read -p "Please enter the IP/hostname of your server: " ip
+read -p "Please enter a user of the server: " suser
+
+ssh $suser@ip << EOF
 read -p "grand or revoke access?: " gr
 if [ "$gr" == "grand" ]; then
     read -p "New User or Existing user? (n, e): " user
@@ -32,3 +38,5 @@ else
   echo "invalid option"
 
 fi
+EOF
+done
