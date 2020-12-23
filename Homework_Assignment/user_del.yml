@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: true
+  vars:
+    users:
+    - asharif
+
+  tasks:
+  - name: "Ping?"
+    ping:
+
+  - name: "Create user accounts and add users to groups"
+    user:
+      name: "{{ item }}"
+      # groups: "devops" #make user group devops exists
+      state: absent
+      remove: yes
+    with_items: "{{ users }}"

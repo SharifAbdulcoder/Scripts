@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: "Ping?"
+    ping:
+
+  - name: "Shell to print out files"
+    shell: "cat /etc/passwd | awk -F : '{ print $1, $3, $5 }'"
+    register: data
+
+  - name: "Slurp /etc/passwd file"
+    slurp:
+      src: /etc/passwd
+    register: slurp_remote_users
+
+  - name: Read file
+    debug:
+      msg: "{{ data.stdout }}"
+      #msg: "{{ slurp_remote_users['content'] | b64decode }}"

@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: true
+  vars:
+    users:
+    - asharif
+
+  tasks:
+  - name: "Ping?"
+    ping:
+
+  - name: "Create user accounts and add users to groups"
+    user:
+      name: "{{ item }}"
+      # groups: "devops" #make user group devops exists
+    with_items: "{{ users }}"
+
+  - name: "Add authorized keys"
+    authorized_key:
+      user: "{{ item }}"
+      key: "{{ lookup('file', 'pub_keys/'+ item + '.pub') }}"
+    with_items: "{{ users }}"
