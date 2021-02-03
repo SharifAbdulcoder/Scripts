@@ -1,5 +1,13 @@
 # import modules
 import paramiko
+import argparse
+
+
+parser.add_argument("-host", "--hostname", dest = "hostname", default = "104.236.34.19", help="host name")
+parser.add_argument("-u", "--username",dest ="username", help="User name")
+parser.add_argument("-p", "--password",dest = "password", help="Password")
+parser.add_argument("-s", "--ssh",dest ="ssh", help="User name")
+
 
 def user_add(user, host, port=22):
     #specifed host(s)
